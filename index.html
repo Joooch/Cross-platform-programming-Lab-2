@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Weather Map</title>
+	<style type="text/css">
+		#map {
+			height: 100%;
+		}
+
+		html,body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		let map;
+		const weatherAPI = "{APIKEY}" // put your API key here; https://openweathermap.org/
+
+		function handleAPI( data ){
+			console.log( data )
+			numberMarkerImg = {
+				url: `http://openweathermap.org/img/w/${data.weather[0].icon}.png`,
+				size: new google.maps.Size(64, 64),
+				scaledSize: new google.maps.Size(64, 64),
+				anchor: new google.maps.Point(32, 32),
+			};
+			var marker = new google.maps.Marker({
+				position: { lat: data.coord.lat, lng: data.coord.lon },
+				map: map,
+				icon: numberMarkerImg,
+			});
+		}
+
+		function initMap() {
+			map = new google.maps.Map(document.getElementById("map"), {
+				zoom: 6,
+				center: { lat: 48.745094, lng: 29.9689834 },
+				mapTypeId: 'terrain',
+
+				/* Hide all labels */
+				// styles: [
+				// 	{
+				// 		featureType: "all",
+				// 		elementType: "labels",
+				// 		stylers: [
+				// 			{ visibility: "off" }
+				// 		]
+				// 	}
+				// ]
+			});
+
+			const image = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+
+			["Vinnytsia", "Chernihiv", "Cherkasy", "Chernivtsi", "Dnipropetrovsk", "Donetsk", "Ivano-Frankivsk", "Kharkiv", "Kherson", "Khmelnytskyi", "Kirovohrad", "Luhansk", "Mykolaiv", "Poltava", "Rivne", "Sumy", "Ternopil", "Vinnytsia", "Lutsk", "Uzhhorod", "Zaporizhia", "Zhytomyr"].forEach(city => {
+				$.get( `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherAPI}`, function( data ){
+					handleAPI( data )
+				} )
+			});
+
+			[
+				{lat: 48.002777, lng: 37.805279,},
+				{lat: 48.450001, lng: 34.983334,},
+				{lat: 50.450001, lng: 30.523333,},
+				{lat: 48.621025, lng: 22.288229,},
+				{lat: 49.842957, lng: 24.031111,},
+				{lat: 44.629650, lng: 33.535667,},
+				{lat: 45.357315, lng: 36.468292,},
+				{lat: 49.553516, lng: 25.594767,},
+				{lat: 45.190449, lng: 33.366867,},
+				{lat: 49.988358, lng: 36.232845,},
+				{lat: 48.748718, lng: 30.221500,},
+				{lat: 46.482952, lng: 30.712481,},
+				{lat: 50.619900, lng: 26.251617,},
+				{lat: 45.031933, lng: 35.382435,},
+				{lat: 44.506302, lng: 34.161301,},
+				{lat: 50.001560, lng: 36.231537,},
+				{lat: 48.738968, lng: 37.584351,},
+				{lat: 48.299999, lng: 39.733334,},
+				{lat: 44.957813, lng: 34.109547,},
+				{lat: 49.444431, lng: 32.059769,},
+				{lat: 49.589542, lng: 34.551273,},
+				{lat: 45.357315, lng: 36.468292,},
+			].forEach(coord => {
+				$.get( `https://api.openweathermap.org/data/2.5/weather?lat=${coord.lat}&lon=${coord.lng}&appid=${weatherAPI}`, function( data ){
+					handleAPI( data )
+				} )
+			});
+		}
+	</script>
+</head>
+
+<body>
+	<div id="map"></div>
+
+	<!-- Put your API Key here; https://developers.google.com/maps/gmp-get-started -->
+	<script src="https://maps.googleapis.com/maps/api/js?key={APIKEY}&callback=initMap&libraries=&v=weekly" async></script>
+</body>
+
+</html>
