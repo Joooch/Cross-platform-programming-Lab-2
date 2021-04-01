@@ -56,9 +56,7 @@
 			const image = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
 
 			["Vinnytsia", "Chernihiv", "Cherkasy", "Chernivtsi", "Dnipropetrovsk", "Donetsk", "Ivano-Frankivsk", "Kharkiv", "Kherson", "Khmelnytskyi", "Kirovohrad", "Luhansk", "Mykolaiv", "Poltava", "Rivne", "Sumy", "Ternopil", "Vinnytsia", "Lutsk", "Uzhhorod", "Zaporizhia", "Zhytomyr"].forEach(city => {
-				$.get( `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherAPI}`, function( data ){
-					handleAPI( data )
-				} )
+				$.get( `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherAPI}`, handleAPI )
 			});
 
 			[
@@ -85,9 +83,7 @@
 				{lat: 49.589542, lng: 34.551273,},
 				{lat: 45.357315, lng: 36.468292,},
 			].forEach(coord => {
-				$.get( `https://api.openweathermap.org/data/2.5/weather?lat=${coord.lat}&lon=${coord.lng}&appid=${weatherAPI}`, function( data ){
-					handleAPI( data )
-				} )
+				$.get( `https://api.openweathermap.org/data/2.5/weather?lat=${coord.lat}&lon=${coord.lng}&appid=${weatherAPI}`, handleAPI )
 			});
 		}
 	</script>
