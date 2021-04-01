@@ -3,7 +3,7 @@ Shows Ukraine weather via [Open Weather](https://openweathermap.org/)
 
 # Configure app
 
-Open `index.html` then insert your API keys
+Open `index.html` and insert your API keys
 
 ## Userfull links:
 - [Google Maps API](https://developers.google.com/maps/gmp-get-started)
